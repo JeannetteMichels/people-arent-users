@@ -22,17 +22,16 @@ Three files, no build step, no dependencies:
 4. In about thirty seconds you have a live site at a URL like
    `people-arent-users.vercel.app`. Open it and check it before touching DNS.
 
-## Part 3: Point peoplearentusers.com at it
+## Part 3: Point jeannettemichels.com at it (the primary domain)
 
-1. In the Vercel project: **Settings → Domains** → type `peoplearentusers.com` → **Add**.
+1. In the Vercel project: **Settings → Domains** → type `jeannettemichels.com` → **Add**.
    When it asks, choose the option that also adds `www` and redirects www to the bare domain.
 2. Vercel now shows you the exact DNS records it needs. Typically:
    - an **A** record, name `@`, value `76.76.21.21`
    - a **CNAME** record, name `www`, value `cname.vercel-dns.com`
    Use whatever Vercel's screen shows you: that screen is the source of truth.
-3. Go to your registrar's DNS page for peoplearentusers.com. At GoDaddy that is:
-   sign in → **My Products** → next to the domain, **⋯ → Manage DNS** (or Domain
-   Settings → DNS tab).
+3. In GoDaddy: sign in → **My Products** → next to jeannettemichels.com,
+   **⋯ → Manage DNS** (or Domain Settings → DNS tab).
 4. GoDaddy domains usually come with a parked **A** record on `@` already.
    **Edit** it (pencil icon) and change its value to the one Vercel gave you.
    Then edit or add the `www` **CNAME** the same way. Delete any other A records
@@ -40,23 +39,21 @@ Three files, no build step, no dependencies:
    because forwarding fights the DNS records.
 5. Back in Vercel, the Domains screen will flip from "Invalid Configuration" to
    a checkmark, usually within minutes, occasionally up to an hour. Vercel
-   issues the SSL certificate automatically. Done: https://peoplearentusers.com
+   issues the SSL certificate automatically. Done: https://jeannettemichels.com
    is live.
 
-## Part 4: Point jeannettemichels.com at the same site (optional, GoDaddy)
+## Part 4: Make peoplearentusers.com land on the same site
 
-Simplest setup: make it redirect to the book site, so both names work.
+1. In the same Vercel project: **Settings → Domains** → add `peoplearentusers.com`.
+2. Because the project already has a domain, Vercel asks what to do with it:
+   choose **Redirect to jeannettemichels.com** (permanent/308 if it offers a choice).
+3. Repeat the DNS steps from Part 3 at the registrar for peoplearentusers.com:
+   edit the `@` A record and `www` CNAME to the values Vercel shows, and remove
+   any forwarding.
 
-1. In the same Vercel project: **Settings → Domains** → add `jeannettemichels.com`.
-2. Vercel will ask what to do with it since the project already has a domain:
-   choose **Redirect to peoplearentusers.com**.
-3. Repeat the GoDaddy DNS steps from Part 3 for jeannettemichels.com: edit the
-   `@` A record and `www` CNAME to the values Vercel shows, remove GoDaddy
-   forwarding if any.
-
-If you later want a separate author site at jeannettemichels.com, remove the
-domain from this project and give it its own project. Nothing about the book
-site changes.
+Anyone who types peoplearentusers.com now arrives at jeannettemichels.com and
+sees the site. The redirect keeps search engines treating it as one site
+instead of two competing copies.
 
 ## Wire the email list (whenever you pick a provider)
 
@@ -90,11 +87,11 @@ Vercel redeploys automatically within a minute. That's the entire workflow.
 - **Headshot**: upload `headshot.jpg` to the repo and uncomment the
   `<figure>` block in the author section (search for `HEADSHOT SLOT`).
 - **Contact email**: `jeannettemichels@gmail.com` appears three times; search
-  and replace all three if you set up an address like hello@peoplearentusers.com
+  and replace all three if you set up an address like hello@jeannettemichels.com
   (GoDaddy sells email forwarding, or your list provider may include it).
 - **Social preview image**: when cover art exists, upload `cover.jpg` to the
   repo and add this line in the `<head>`:
-  `<meta property="og:image" content="https://peoplearentusers.com/cover.jpg">`
+  `<meta property="og:image" content="https://jeannettemichels.com/cover.jpg">`
   Shared links on LinkedIn will then show the cover.
 - **The sample document** in the Document Test is the prefilled text inside
   `<textarea id="doc">`. Swap in any spec you'd rather skewer.

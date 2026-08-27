@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>People Aren't Users | Jeannette Michels</title>
 <meta name="description" content="Five letters where a person used to be. A book about the word at the center of every system built to serve people, and what it costs. By Jeannette Michels.">
-<link rel="canonical" href="https://peoplearentusers.com/">
+<link rel="canonical" href="https://jeannettemichels.com/">
 <meta property="og:title" content="People Aren't Users">
 <meta property="og:description" content="Five letters where a person used to be. A book by Jeannette Michels.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://peoplearentusers.com/">
+<meta property="og:url" content="https://jeannettemichels.com/">
 <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="8" fill="%23191512"/><text x="32" y="44" font-family="Georgia,serif" font-size="38" fill="%23f7f3ec" text-anchor="middle">u</text><line x1="12" y1="34" x2="52" y2="30" stroke="%23e05c3a" stroke-width="5" stroke-linecap="round"/></svg>'>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -93,11 +93,19 @@
   }
   @keyframes strike{to{width:102%}}
   @media (prefers-reduced-motion: reduce){ .struck::after{width:102%} }
+  .subtitle{
+    margin-top:26px;font-family:"IBM Plex Mono",monospace;font-size:.88rem;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+  }
   .theyare{
-    margin-top:40px;font-family:"Fraunces",Georgia,serif;
+    margin-top:34px;font-family:"Fraunces",Georgia,serif;
     font-size:clamp(1.3rem,2.6vw,1.8rem);font-weight:400;color:var(--muted);
   }
-  .theyare .rotor{color:var(--ink);font-weight:500;border-bottom:2px solid var(--accent);padding-bottom:1px}
+  .theyare .rotor{font-weight:500;border-bottom:2px solid currentColor;padding-bottom:1px;transition:color .25s ease}
+  .rc0{color:#b3361c}.rc1{color:#2f6f4f}.rc2{color:#3b5aa0}.rc3{color:#8a5a00}.rc4{color:#7c4585}.rc5{color:#0f766e}
+  @media (prefers-color-scheme: dark){
+    .rc0{color:#e05c3a}.rc1{color:#5cb890}.rc2{color:#7d9ce8}.rc3{color:#d9a542}.rc4{color:#c78bd1}.rc5{color:#4fc3b8}
+  }
   .hero .sub{margin-top:38px;font-size:1.22rem;max-width:560px;color:var(--ink)}
   .hero .sub em{font-style:italic}
   .hero-ctas{margin-top:44px;display:flex;gap:14px;flex-wrap:wrap}
@@ -138,15 +146,20 @@
     font-family:"IBM Plex Mono",monospace;font-size:.92rem;line-height:1.7;outline:none;
   }
   #result{font-family:"IBM Plex Mono",monospace;font-size:.92rem;line-height:1.7;min-height:230px;white-space:pre-wrap}
-  #result .swap{background:var(--mark);color:var(--accent);font-weight:500;padding:0 3px;border-radius:2px}
-  #result .waiting{color:var(--faint)}
-  .test-controls{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:20px}
-  .test-controls label{font-family:"IBM Plex Mono",monospace;font-size:.85rem;color:var(--muted)}
-  select#realword{
-    font-family:"IBM Plex Mono",monospace;font-size:.9rem;padding:10px 14px;border-radius:3px;
-    border:1px solid var(--ink);background:var(--paper);color:var(--ink);
+  #result .swap{background:var(--mark);color:var(--accent);font-weight:500;padding:0 3px;border-radius:2px;animation:pop .35s ease}
+  @keyframes pop{from{background:var(--accent);color:var(--paper)}}
+  .chiprow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:26px}
+  .chiprow + .test-grid{margin-top:22px}
+  .chiplabel{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:var(--muted)}
+  .chip{
+    font-family:"IBM Plex Mono",monospace;font-size:.82rem;letter-spacing:.02em;cursor:pointer;
+    padding:8px 14px;border-radius:99px;border:1px solid var(--rule);background:var(--card);color:var(--ink);
   }
-  .verdict{margin-top:30px;max-width:660px;color:var(--muted);font-style:italic}
+  .chip:hover{border-color:var(--accent);color:var(--accent)}
+  .chip.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .chip.active:hover{color:var(--paper)}
+  .count{margin-top:22px;font-size:.85rem;color:var(--accent);min-height:1.3em}
+  .verdict{margin-top:12px;max-width:660px;color:var(--muted);font-style:italic}
 
   /* ---------- excerpt ---------- */
   .bookpage{max-width:660px}
@@ -166,8 +179,25 @@
   .author-side dl{font-size:.98rem}
   .author-side dt{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:18px}
   .author-side dd{margin-top:4px}
-  /* HEADSHOT SLOT: when you have a photo, uncomment the <figure> in the author
-     section below and drop the file in this folder as headshot.jpg */
+  .headshot{margin:0 0 34px}
+  .headshot img{
+    max-width:250px;width:60%;height:auto;border-radius:4px;
+    border:1px solid var(--rule);
+  }
+  .headshot figcaption{
+    font-family:"IBM Plex Mono",monospace;font-size:.76rem;letter-spacing:.03em;
+    color:var(--muted);margin-top:10px;max-width:250px;line-height:1.5;
+  }
+  .photos{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:72px}
+  @media (max-width:760px){ .photos{grid-template-columns:1fr;max-width:440px} }
+  .photos img{
+    width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:4px;
+    border:1px solid var(--rule);display:block;
+  }
+  .photos figcaption{
+    font-family:"IBM Plex Mono",monospace;font-size:.76rem;letter-spacing:.03em;
+    color:var(--muted);margin-top:10px;line-height:1.5;
+  }
 
   /* ---------- signup ---------- */
   .signup{background:var(--ink);color:var(--paper);border-bottom:none}
@@ -222,8 +252,9 @@
     <div class="wrap">
       <p class="kicker">A book by Jeannette Michels</p>
       <h1 class="title">People aren't<br><span class="struck">users</span>.</h1>
+      <p class="subtitle">Five letters where a person used to be</p>
       <p class="theyare" aria-live="off">They are <span class="rotor" id="rotor">patients</span></p>
-      <p class="sub">There is a word at the center of almost every system built to serve people in the last fifty years. It decides why the hold music plays, why there is no number to call, and what an AI thinks you are. The word is <em>user</em>. This book is about getting your name back.</p>
+      <p class="sub">There is a word at the center of almost every system built to serve people in the last fifty years. It decides why the hold music plays, why there is no number to call, and what the AI deciding your loan sees when it looks at you. The word is <em>user</em>. This book is about getting your name back.</p>
       <div class="hero-ctas">
         <a class="btn solid" href="#opening">Read the opening</a>
         <a class="btn ghost" href="#test">Run the Document Test</a>
@@ -253,43 +284,43 @@
       <p class="seclabel">02 / The Document Test</p>
       <h2>Do not read the mission statement. Read what they write when nobody outside is watching.</h2>
       <div class="prose">
-        <p>Every organization keeps two vocabularies: the one on the values page and the one in last Tuesday's meeting notes. The Document Test finds out which one is real. Paste anything below, a spec, a roadmap, a memo, or use the sample. Then swap the word and read what survives.</p>
+        <p>Every organization keeps two vocabularies: the one on the values page and the one in last Tuesday's meeting notes. The Document Test finds out which one is real. Pick a sample or paste your own spec, roadmap, or memo. Then choose who you actually mean, and read what survives.</p>
+      </div>
+
+      <div class="chiprow" role="group" aria-label="Sample documents">
+        <span class="chiplabel">Try a document:</span>
+        <button type="button" class="chip sample active" data-sample="spec">Product spec</button>
+        <button type="button" class="chip sample" data-sample="winback">Win-back campaign</button>
+        <button type="button" class="chip sample" data-sample="school">School portal notice</button>
+        <span class="chiplabel">or paste your own below.</span>
       </div>
 
       <div class="test-grid">
         <div class="pane">
-          <h3>Your document</h3>
+          <h3>The document</h3>
           <label for="doc" class="mono" style="position:absolute;left:-9999px">Paste your document</label>
-          <textarea id="doc" spellcheck="false">Q3 priorities:
-
-Increase daily active users by 12%.
-Reduce user friction at onboarding.
-Hit the lapsed user cohort hard in the first seven days.
-Extend average user session length.
-Users who churn within 30 days enter the win-back flow.
-Ship the notification engine. Users respond best after 9pm.</textarea>
+          <textarea id="doc" spellcheck="false"></textarea>
         </div>
         <div class="pane">
           <h3>What survives</h3>
-          <div id="result" aria-live="polite"><span class="waiting">Choose the real word and run the test.</span></div>
+          <div id="result" aria-live="polite"></div>
         </div>
       </div>
 
-      <div class="test-controls">
-        <label for="realword">Replace "users" with the people you mean:</label>
-        <select id="realword">
-          <option value="parents">parents</option>
-          <option value="patients">patients</option>
-          <option value="students">students</option>
-          <option value="teachers">teachers</option>
-          <option value="nurses">nurses</option>
-          <option value="neighbors">neighbors</option>
-          <option value="your mother">your mother</option>
-          <option value="seven-year-olds">seven-year-olds</option>
-        </select>
-        <button class="btn solid" id="runtest" type="button">Run the test</button>
+      <div class="chiprow" role="group" aria-label="Replacement words">
+        <span class="chiplabel">Who do you actually mean?</span>
+        <button type="button" class="chip word active" data-word="parents">parents</button>
+        <button type="button" class="chip word" data-word="patients">patients</button>
+        <button type="button" class="chip word" data-word="students">students</button>
+        <button type="button" class="chip word" data-word="teachers">teachers</button>
+        <button type="button" class="chip word" data-word="nurses">nurses</button>
+        <button type="button" class="chip word" data-word="neighbors">neighbors</button>
+        <button type="button" class="chip word" data-word="voters">voters</button>
+        <button type="button" class="chip word" data-word="grandparents">grandparents</button>
+        <button type="button" class="chip word" data-word="seven-year-olds">seven-year-olds</button>
       </div>
 
+      <p class="count mono" id="count"></p>
       <p class="verdict">The sentences that survive the swap are the honest ones. The sentences that suddenly feel wrong were always wrong. You could not hear it through the word.</p>
     </div>
   </section>
@@ -349,16 +380,17 @@ Ship the notification engine. Users respond best after 9pm.</textarea>
       <h2>A career that never made sense on paper</h2>
       <div class="author-grid">
         <div class="prose">
-          <!-- HEADSHOT SLOT: uncomment when headshot.jpg is in this folder
-          <figure style="margin:0 0 32px">
-            <img src="headshot.jpg" alt="Jeannette Michels" style="max-width:280px;width:100%;border-radius:4px">
+          <figure class="headshot">
+            <img src="headshot.jpg" alt="Jeannette Michels" width="273" height="322">
+            <figcaption>I live in Bend, Oregon, where the pet parade still happens.</figcaption>
           </figure>
-          -->
-          <p>I started in a care facility in Reno with a clipboard, measuring how long a woman named Roslyn stayed seated and never asking where she was going. I was a school counselor in Culver City and a family support specialist in Seattle. I founded an eLearning company and watched a good mission drift toward completion rates. I co-founded PackIt, built it from a kitchen-table sketch into one of the fastest-growing companies in America, and sat in the Target vendor room while the families we started it for turned into retention mechanisms.</p>
-          <p>Then I went corporate, working with organizations across multiple countries, and became fluent in the most sophisticated version of the language this book is about. I did not climb one ladder. I moved sideways through a dozen worlds, and in every one of them I watched a specific human being get converted into a category so a system could do something to them faster.</p>
-          <p>Today I am Head of Marketing at Amdocs' Experience &amp; Digital Engineering Studio, where I have led four global studies of the same gap: two CX20 studies of customers, an EX20 study of employees, and now X20, which measures what AI inherits from the organizations deploying it. The pattern holds every time. In the CX20 research, eighty percent of business leaders said their companies were meeting customer expectations. Twenty-four percent of customers agreed. The book is why that gap exists. The studies are how I know it is not a feeling.</p>
-          <p>I have spoken from a TEDx stage and at USC and UCLA, and my sessions sell out. Every time I talk about the distance between the words an organization uses and the people it was built to serve, someone finds me afterward and says the same sentence: I have felt this my whole life. I never heard anyone say it out loud. That sentence is why the book exists.</p>
-          <p>I live in Bend, Oregon, where the pet parade still happens.</p>
+          <p>I trained in clinical psychology and behavior analysis. The training handed me a clipboard in a care facility in Reno, where I measured how long a woman named Roslyn stayed seated. I recorded the behavior the system asked me to record and never asked where she was trying to go. I was doing the job correctly and still missing the person.</p>
+          <p>From there I became a school counselor in Culver City and a family support specialist in Seattle. I founded IntegriTeach, which built online professional development for teachers and counselors, and watched a mission I believed in become a set of completion rates. Then I co-founded PackIt and helped turn a kitchen-table idea into a patented consumer category carried in more than 7,000 retail locations. PackIt made the Inc. 5000 three times and ranked No. 1 on Inc.'s list of the 50 fastest-growing women-led private companies in America.</p>
+          <p>By every conventional measure, PackIt was a success. I still remember sitting in a Target vendor room and hearing the families we had built the product for discussed in the language of repeat purchase and retention. The language was ordinary, efficient, and so familiar that no one had reason to question what it left out.</p>
+          <p>Corporate work gave me a more sophisticated vocabulary for the same disappearance. A person became a user, subscriber, account holder, policyholder, patient, passenger, member, case, claim, conversion, or churn risk. Some labels described a role. Others reduced the person to a record, a transaction, or a probability. Each could be accurate and still incomplete. The problem began when the system forgot the difference.</p>
+          <p>Today I lead global marketing strategy, insights, and analytics for Amdocs' Experience Design and Digital Engineering business, which operates across more than 50 countries. I created CX20 and EX20, global research platforms that measure the distance between what organizations believe they deliver and what customers and employees actually experience. The latest CX20 study included nearly 3,000 business leaders and consumers across 14 countries. Eighty percent of business leaders said their companies were meeting customer expectations. Only 24 percent of customers agreed. That 56-point gap measures how far an organization's story can drift from the experience of the people it serves. X20 extends the work to AI, examining what happens when technology inherits an organization's data, processes, and blind spots.</p>
+          <p>I gave a TEDx talk called It's My Neighbor's Fault, and I have spoken about this work at USC's Marshall School of Business, UCLA's Anderson School of Management, and on stages across the industry. Afterward, people find me and say some version of the same thing: I have felt this my whole life. I never heard anyone say it out loud.</p>
+          <p><em>People Aren't Users</em> grew from the question I failed to ask Roslyn, and from every version of that omission I have met since. It is about what organizations stop seeing when the role becomes the whole person, and what changes when someone finally looks up from the clipboard.</p>
         </div>
         <aside class="author-side" aria-label="At a glance">
           <dl>
@@ -367,13 +399,29 @@ Ship the notification engine. Users respond best after 9pm.</textarea>
             <dt>Shelved with</dt>
             <dd><em>The Tyranny of Metrics</em> (Muller), <em>Business Bullshit</em> (Spicer)</dd>
             <dt>Speaking</dt>
-            <dd>TEDx, USC, UCLA. Sold-out sessions.</dd>
+            <dd>TEDx Constitution Drive, USC Marshall, UCLA Anderson. Sold-out sessions.</dd>
             <dt>Research</dt>
-            <dd>Two CX20 global studies, EX20, and the X20 study of what AI inherits</dd>
+            <dd>Creator of CX20 and EX20. X20 extends the work to AI.</dd>
             <dt>Representation &amp; rights</dt>
             <dd><a href="mailto:jeannettemichels@gmail.com">jeannettemichels@gmail.com</a></dd>
+            <dt>Elsewhere</dt>
+            <dd><a href="https://www.linkedin.com/in/jeannettemichels/" rel="me">LinkedIn</a></dd>
           </dl>
         </aside>
+      </div>
+      <div class="photos">
+        <figure>
+          <img src="packit-martha.jpg" alt="Jeannette Michels and PackIt co-founder Melissa with Martha Stewart, who is holding a PackIt lunch bag" loading="lazy">
+          <figcaption>The PackIt years. Martha Stewart, holding the bag.</figcaption>
+        </figure>
+        <figure>
+          <img src="speaking-nfte.jpg" alt="Jeannette Michels teaching a market research session for NFTE" loading="lazy">
+          <figcaption>Teaching market research to student founders with NFTE.</figcaption>
+        </figure>
+        <figure>
+          <img src="speaking-stage.jpg" alt="Jeannette Michels speaking on stage with a microphone at a Stellar Elements event" loading="lazy">
+          <figcaption>On stage at Stellar Elements.</figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -404,7 +452,7 @@ Ship the notification engine. Users respond best after 9pm.</textarea>
     <p class="foot-line">This site has no <span class="x">users</span>. It has visitors, and they were people the whole time.</p>
     <p class="foot-small">
       No cookies. No trackers. No banner asking you to agree to either.<br>
-      &copy; 2026 Jeannette Michels &middot; Bend, Oregon &middot; <a href="mailto:jeannettemichels@gmail.com">Write to me</a>
+      &copy; 2026 Jeannette Michels &middot; Bend, Oregon &middot; <a href="mailto:jeannettemichels@gmail.com">Write to me</a> &middot; <a href="https://www.linkedin.com/in/jeannettemichels/">LinkedIn</a>
     </p>
   </div>
 </footer>
@@ -413,28 +461,41 @@ Ship the notification engine. Users respond best after 9pm.</textarea>
 (function(){
   "use strict";
 
-  /* ----- hero rotor ----- */
-  var words = ["patients.","students.","parents.","nurses.","neighbors.","voters.","people."];
+  /* ----- hero rotor: continuous, colored ----- */
+  var words = ["patients.","students.","parents.","nurses.","teachers.","neighbors.","voters.","people."];
   var rotor = document.getElementById("rotor");
   var i = 0;
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function paint(idx){
+    rotor.className = "rotor rc" + (idx % 6);
+    rotor.textContent = words[idx % words.length];
+  }
   if (reduced) {
+    rotor.className = "rotor rc0";
     rotor.textContent = "people.";
   } else {
-    rotor.textContent = words[0];
-    var t = setInterval(function(){
+    rotor.style.transition = "opacity .18s ease, color .25s ease";
+    paint(0);
+    setInterval(function(){
       i++;
-      if (i >= words.length) { clearInterval(t); return; }
       rotor.style.opacity = "0";
       setTimeout(function(){
-        rotor.textContent = words[i];
+        paint(i);
         rotor.style.opacity = "1";
       }, 180);
-    }, 1400);
-    rotor.style.transition = "opacity .18s ease";
+    }, 1600);
   }
 
-  /* ----- document test ----- */
+  /* ----- document test: live ----- */
+  var samples = {
+    spec: "Q3 priorities:\n\nIncrease daily active users by 12%.\nReduce user friction at onboarding.\nHit the lapsed user cohort hard in the first seven days.\nExtend average user session length.\nUsers who churn within 30 days enter the win-back flow.\nShip the notification engine. Users respond best after 9pm.",
+    winback: "Re-engagement plan, v2:\n\nTarget dormant users with a personalized win-back sequence.\nUsers inactive for 14 days receive offer A. Escalate send frequency for lapsed users.\nA user who opens but does not convert moves to the urgency track.\nSuccess metric: reactivated users per week. Kill the campaign only when user LTV turns negative.",
+    school: "District portal notice:\n\nAll users must activate lunch accounts before Monday.\nUsers should locate their student ID prior to login. Password resets are sent to the email on file.\nUsers experiencing issues may consult the FAQ.\nThe support line is available Tuesdays, 10 to 11:30am."
+  };
+  var docEl = document.getElementById("doc");
+  var resultEl = document.getElementById("result");
+  var countEl = document.getElementById("count");
+  var currentWord = "parents";
   function escapeHtml(s){
     return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
   }
@@ -442,25 +503,49 @@ Ship the notification engine. Users respond best after 9pm.</textarea>
     var map = {
       "parents":"parent","patients":"patient","students":"student",
       "teachers":"teacher","nurses":"nurse","neighbors":"neighbor",
-      "your mother":"your mother","seven-year-olds":"seven-year-old"
+      "voters":"voter","grandparents":"grandparent","seven-year-olds":"seven-year-old"
     };
     return map[plural] || plural;
   }
-  function runTest(){
-    var src = document.getElementById("doc").value;
-    var plural = document.getElementById("realword").value;
-    var singular = singularOf(plural);
+  function render(animate){
+    var src = docEl.value;
+    var singular = singularOf(currentWord);
+    var n = 0;
     var out = escapeHtml(src).replace(/\b(end[ -]?users?|users?)\b/gi, function(m){
-      var isPlural = /s$/i.test(m);
-      var rep = isPlural ? plural : singular;
-      if (m[0] === m[0].toUpperCase()) {
-        rep = rep.charAt(0).toUpperCase() + rep.slice(1);
-      }
-      return '<span class="swap">' + rep + "</span>";
+      n++;
+      var rep = /s$/i.test(m) ? currentWord : singular;
+      if (m[0] === m[0].toUpperCase()) rep = rep.charAt(0).toUpperCase() + rep.slice(1);
+      return '<span class="swap"' + (animate ? "" : ' style="animation:none"') + '>' + rep + "</span>";
     });
-    document.getElementById("result").innerHTML = out;
+    resultEl.innerHTML = out;
+    if (n === 0) {
+      countEl.textContent = src.trim() ? "No users here. This document already sees people." : "";
+    } else {
+      countEl.textContent = "The word appears " + n + (n === 1 ? " time" : " times") + " in this document.";
+    }
   }
-  document.getElementById("runtest").addEventListener("click", runTest);
+  document.querySelectorAll(".chip.sample").forEach(function(c){
+    c.addEventListener("click", function(){
+      document.querySelectorAll(".chip.sample").forEach(function(x){x.classList.remove("active")});
+      c.classList.add("active");
+      docEl.value = samples[c.dataset.sample];
+      render(true);
+    });
+  });
+  document.querySelectorAll(".chip.word").forEach(function(c){
+    c.addEventListener("click", function(){
+      document.querySelectorAll(".chip.word").forEach(function(x){x.classList.remove("active")});
+      c.classList.add("active");
+      currentWord = c.dataset.word;
+      render(true);
+    });
+  });
+  docEl.addEventListener("input", function(){
+    document.querySelectorAll(".chip.sample").forEach(function(x){x.classList.remove("active")});
+    render(false);
+  });
+  docEl.value = samples.spec;
+  render(false);
 
   /* ----- keep reading ----- */
   var moreBtn = document.getElementById("morebtn");
