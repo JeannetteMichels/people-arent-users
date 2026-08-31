@@ -110,6 +110,18 @@ a {
   text-decoration: none;
 }
 
+
+/* no ligatures in display type */
+h1, h2, h3,
+.wordmark,
+.credential strong,
+.pull-quote strong,
+.role-ribbon,
+footer > p {
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "dlig" 0;
+}
+
 .crossed {
   position: relative;
   display: inline-block;
@@ -364,6 +376,10 @@ a {
   display: flex;
   align-items: center;
   gap: clamp(16px, 2.5vw, 40px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
   min-height: 78px;
   padding: 14px 5vw;
   overflow: hidden;
