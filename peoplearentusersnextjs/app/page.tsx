@@ -43,6 +43,10 @@ export default function Home() {
     return () => window.removeEventListener("scroll", updateProgress);
   }, []);
 
+  // When an email-list provider is connected (Kit, Buttondown, Mailchimp),
+  // set its endpoint here and submissions will be recorded before the redirect.
+  const FORM_ENDPOINT = "https://app.kit.com/forms/9873593/subscriptions";
+
   function submitForm(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -51,14 +55,20 @@ export default function Home() {
       setFormNote("That does not look like an email address. Try again.");
       return;
     }
-    const subject = encodeURIComponent("Send me the opening chapter");
-    const body = encodeURIComponent(
-      `Please send the opening chapter of People Aren't Users to: ${email}`,
-    );
-    setFormNote(
-      "Opening your email app. If nothing happens, write to jeannettemichels@gmail.com and the chapter will come to you.",
-    );
-    window.location.href = `mailto:jeannettemichels@gmail.com?subject=${subject}&body=${body}`;
+    if (FORM_ENDPOINT) {
+      try {
+        void fetch(FORM_ENDPOINT, {
+          method: "POST",
+          body: new URLSearchParams({ email_address: email }),
+          keepalive: true,
+          mode: "no-cors",
+        });
+      } catch {
+        /* the chapter opens either way */
+      }
+    }
+    setFormNote("It\u2019s yours. One second.");
+    window.location.href = "/chapter-one";
   }
 
   return (
@@ -72,6 +82,7 @@ export default function Home() {
           <a href="#book">The book</a>
           <a href="#opening">The opening</a>
           <a href="#author">The author</a>
+          <a href="#rights">Book &amp; rights</a>
         </nav>
         <a className="header-cta" href="#chapter">Get the chapter</a>
       </header>
@@ -206,7 +217,7 @@ export default function Home() {
               <div className="author-prose">
                 <p>I trained in clinical psychology and behavior analysis. The training handed me a clipboard in a care facility in Reno, where I measured how long a woman named Roslyn stayed seated. I recorded the behavior the system asked me to record and never asked where she was trying to go.</p>
                 <p className="author-thesis">I was doing the job correctly and still missing the person.</p>
-                <p>From there I became a school counselor in Culver City and a family support specialist in Seattle. I founded IntegriTeach, which built online professional development for teachers and counselors, and watched a mission I believed in become a set of completion rates. Then I co-founded PackIt and helped turn a kitchen-table idea into a patented consumer category carried in more than 7,000 retail locations across more than 40 countries, including Walmart and Target. PackIt made the Inc. 5000 three times and ranked No. 1 on Inc.&apos;s list of the 50 fastest-growing women-led private companies in America.</p>
+                <p>From there I became a school counselor in Culver City and a family support specialist in Seattle. I founded IntegriTeach, which built online professional development for teachers and counselors, and watched a mission I believed in become a set of completion rates. Then I co-founded PackIt and helped turn a kitchen-table idea into a patented consumer category.</p>
                 <p>By every conventional measure, PackIt was a success. I still remember sitting in a Target vendor room and hearing the families we had built the product for discussed in the language of repeat purchase and retention. The language was ordinary, efficient, and so familiar that no one had reason to question what it left out.</p>
               </div>
             </div>
@@ -230,19 +241,19 @@ export default function Home() {
               <div className="credential">
                 <span>Spoken</span>
                 <strong>TEDx + universities</strong>
-                <p>TEDx Constitution Drive, USC Marshall School of Business, UCLA Anderson School of Management, and stages across the industry. Published and featured in Inc., CX Scoop, and C-Suite Quarterly.</p>
+                <p>TEDx Constitution Drive, UCLA Anderson School of Management, USC Marshall School of Business, and stages across the industry. Published and featured in Inc., CX Scoop, and C-Suite Quarterly.</p>
               </div>
             </div>
 
             <div className="author-story">
               <div className="author-prose">
                 <p>Corporate work gave me a more sophisticated vocabulary for the same disappearance. A person became a user, subscriber, account holder, policyholder, patient, passenger, member, case, claim, conversion, or churn risk. Some labels described a role. Others reduced the person to a record, a transaction, or a probability. Each could be accurate and still incomplete. The problem began when the system forgot the difference.</p>
-                <p>Today I lead global marketing strategy, insights, and analytics for Amdocs&apos; Experience Design and Digital Engineering business, which operates across more than 50 countries. I created CX20 and EX20, global research platforms that measure the distance between what organizations believe they deliver and what customers and employees actually experience. The latest CX20 study included nearly 3,000 business leaders and consumers across 14 countries. Eighty percent of business leaders said their companies were meeting customer expectations. Only 24 percent of customers agreed. That 56-point gap measures how far an organization&apos;s story can drift from the experience of the people it serves.</p>
-                <p>I then developed X20, a framework for seeing what AI will inherit before it begins acting across the organization. It examines 20 gaps across perception, communication and engagement, operations, technology, and data and analytics. The first X20 Global Study is now being fielded with approximately 1,000 business leaders and 2,000 customers and employees across 14 industries and 14 countries. It asks what happens when AI enters the same organizational gaps people were already living inside.</p>
-                <p>I gave a TEDx talk called <em>It&apos;s My Neighbor&apos;s Fault</em>, and I have spoken about this work at USC&apos;s Marshall School of Business, UCLA&apos;s Anderson School of Management, and on stages across the industry. Afterward, people find me and say some version of the same thing: I have felt this my whole life. I never heard anyone say it out loud.</p>
+                <p>Today I lead global marketing strategy, insights, and analytics for Amdocs&apos; Experience Design and Digital Engineering business. The latest CX20 study included nearly 3,000 business leaders and consumers across 14 countries. Eighty percent of business leaders said their companies were meeting customer expectations. Only 24 percent of customers agreed. That 56-point gap measures how far an organization&apos;s story can drift from the experience of the people it serves.</p>
+                <p>X20 extends that work to AI. It asks what happens when technology enters the same organizational gaps people were already living inside.</p>
+                <p>I gave a TEDx talk called <em>It&apos;s My Neighbor&apos;s Fault</em>, and I have spoken about this work at UCLA&apos;s Anderson School of Management, USC&apos;s Marshall School of Business, and on stages across the industry. Afterward, people find me and say some version of the same thing: I have felt this my whole life. I never heard anyone say it out loud.</p>
                 <p><em>People Aren&apos;t Users</em> grew from the question I failed to ask Roslyn, and from every version of that omission I have met since. It is about what organizations stop seeing when the role becomes the whole person, and what changes when someone finally looks up from the clipboard.</p>
               </div>
-              <aside className="author-facts" aria-label="Book and rights">
+              <aside id="rights" className="author-facts" aria-label="Book and rights">
                 <p className="stamp">Book &amp; rights</p>
                 <dl>
                   <dt>The book</dt>
@@ -278,13 +289,13 @@ export default function Home() {
           <div className="chapter-mark" aria-hidden="true">USER</div>
           <div className="chapter-inner">
             <p className="section-label">04 / Before the book</p>
-            <h2>Take the first chapter now</h2>
-            <p>Leave an email and you get the full opening chapter, and one message when the book has a date. That is the whole arrangement. No drip sequence. No re-engagement campaign built to hit you hard in the first seven days. You are not a cohort.</p>
+            <h2>Read Chapter One</h2>
+            <p>Leave your email and I&apos;ll send you the full opening chapter, and one message when the book has a date. That is the whole arrangement. No drip sequence. No re-engagement campaign built to hit you hard in the first seven days. You are not a cohort.</p>
             <form onSubmit={submitForm} noValidate>
               <label htmlFor="email">Your email</label>
               <div className="form-row">
-                <input id="email" name="email" type="email" placeholder="you@example.com" />
-                <button type="submit">Send me the chapter</button>
+                <input id="email" name="email" type="email" placeholder="you@example.com" required autoComplete="email" />
+                <button type="submit">Read Chapter One</button>
               </div>
               <p className="form-note" aria-live="polite">{formNote}</p>
             </form>
