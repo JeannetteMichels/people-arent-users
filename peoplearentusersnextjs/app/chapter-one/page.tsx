@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   description:
     "You Were Renamed — the opening chapter of People Aren't Users by Jeannette Michels.",
   alternates: { canonical: "/chapter-one" },
+  robots: { index: false, follow: true },
 };
 
 export default function ChapterOne() {
